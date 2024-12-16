@@ -23,7 +23,7 @@ const Login = () => {
                     <NavLink className='h-full w-full bg-transparent/25 rounded-bl-2xl flex justify-center items-center'>
                         Login
                     </NavLink>
-                    <NavLink to='/SignUp' className='h-full w-full bg-transparent rounded-br-2xl shadow-inner flex justify-center items-center'>
+                    <NavLink to='/signup' className='h-full w-full bg-transparent rounded-br-2xl shadow-inner flex justify-center items-center'>
                         Sign Up
                     </NavLink>
                 </div>
