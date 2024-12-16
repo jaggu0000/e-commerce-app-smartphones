@@ -30,6 +30,9 @@ const UserNavbar = () => {
 
                     <div className='hidden sm:flex justify-center items-center'>
                         <div className='flex items-center gap-6 justify-center '>
+                            <NavLink to={'/orders'} className='flex items-center justify-center cursor-pointer hover:text-slate-700'>
+                            <h1 className='text-lg font-mono'>Orders</h1>
+                            </NavLink>
                             <NavLink to={'/cart'} className='flex items-center justify-center cursor-pointer hover:-translate-y-0.5' >
                                 <img src={cart} className='w-8' />
                                 <h1 className='text-lg font-mono'>Cart</h1>
@@ -43,9 +46,9 @@ const UserNavbar = () => {
                             </div>
                         </div>
                     </div>
-                    
+
                     {/* ------------------------------user details, cart and orders for smaller devices------------------------ */}
-                    
+
                     <div className='flex sm:hidden justify-center items-center'>
                         <div className='flex items-center gap-4 justify-center '>
                             <NavLink to={'/cart'} className='flex items-center justify-center cursor-pointer hover:-translate-y-0.5' >
