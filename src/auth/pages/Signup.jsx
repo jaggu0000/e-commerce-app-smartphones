@@ -4,9 +4,9 @@ import '../../styles/login_signup.css'
 import icon from '../../../public/assets/icon.png'
 
 const Signup = () => {
-  return (
+return (
     <div className='login_signup h-screen flex justify-center items-center '>
-      <div className='bg-transparent/25 h-[530px] w-1/4 rounded-2xl flex flex-col items-center justify-between'>
+      <div className='bg-transparent/25 h-[530px] sm:w-[350px] lg:w-[400px] rounded-2xl flex flex-col items-center justify-between'>
         <div className='bg-transparent/25 w-full flex flex-col grow items-center shadow-inner rounded-t-2xl'>
 
           <img src={icon} className='w-20 mt-9' />

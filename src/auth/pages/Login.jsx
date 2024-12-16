@@ -6,14 +6,14 @@ import icon from '../../../public/assets/icon.png'
 const Login = () => {
     return (
         <div className='login_signup h-screen flex justify-center items-center'>
-            <div className='bg-transparent/25 h-[530px] w-1/4 rounded-2xl flex flex-col items-center justify-between'>
+            <div className='bg-transparent/25 h-[530px] sm:w-[350px] lg:w-[400px] rounded-2xl flex flex-col items-center justify-between'>
                 <div className='bg-transparent/25 w-full flex flex-col grow items-center shadow-inner rounded-t-2xl'>
                     <img src={icon} className='w-20 mt-9' />
                     <form className='flex flex-col justify-center items-center gap-4 p-10 w-full font-medium '>
                         <input type="text" className='border border-black h-10 w-full rounded-xl p-4 ' placeholder='Username or email' />
                         <input type="password" className='border border-black h-10 w-full rounded-xl p-4' placeholder='Password' />
                         <input type="submit" value="Login" className='bg-orange-600 h-10 w-full rounded-3xl mt-5 cursor-pointer hover:bg-orange-700' />
-                        <NavLink className="text-slate-500">
+                        <NavLink className="text-slate-500 hover:text-slate-200">
                             Guest
                         </NavLink>
                     </form>
