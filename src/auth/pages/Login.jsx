@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import '../../styles/login_signup.css'
-import icon from '../../../public/assets/icon.png'
+import icon from '../../../public/assets/icon_light.png'
 
 const Login = () => {
     return (
