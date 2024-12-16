@@ -5,7 +5,7 @@ import icon from '../../../public/assets/icon.png'
 
 const Signup = () => {
   return (
-    <div className='h-screen flex justify-center items-center '>
+    <div className='login_signup h-screen flex justify-center items-center '>
       <div className='bg-transparent/25 h-[530px] w-1/4 rounded-2xl flex flex-col items-center justify-between'>
         <div className='bg-transparent/25 w-full flex flex-col grow items-center shadow-inner rounded-t-2xl'>
 
