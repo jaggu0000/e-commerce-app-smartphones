@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import icon from '../../public/assets/icon_dark.png'
 import { NavLink } from 'react-router-dom'
 import cart from '../../public/assets/cart.png'
@@ -26,42 +26,56 @@ const UserNavbar = () => {
                         </div>
                     </div>
 
-                    {/* ---------------------------user details, cart and orders for larger devices--------------- */}
+                    {/* ----------------------------cart and user dropdown--------------------------- */}
 
-                    <div className='hidden sm:flex justify-center items-center'>
-                        <div className='flex items-center gap-6 justify-center '>
-                            <NavLink to={'/orders'} className='flex items-center justify-center cursor-pointer hover:text-slate-700'>
-                            <h1 className='text-lg font-mono'>Orders</h1>
-                            </NavLink>
-                            <NavLink to={'/cart'} className='flex items-center justify-center cursor-pointer hover:-translate-y-0.5' >
-                                <img src={cart} className='w-8' />
-                                <h1 className='text-lg font-mono'>Cart</h1>
-                            </NavLink>
-                            <div className='flex justify-center items-center gap-2 w-48'>
-                                <div className='flex gap-1'>
-                                    <img src={user_profile_default} className='w-7' />
-                                    <h1 className='font-mono text-lg'>Username</h1>
-                                </div>
-                                <NavLink to={'/login'} className='bg-orange-600 font-mono h-8 w-16 rounded-xl flex items-center justify-center hover:bg-orange-700 hover:shadow'>Logout</NavLink>
+                    <div className='flex items-center justify-center gap-3'>
+                        <NavLink to={'/cart'} className='flex items-center justify-center cursor-pointer hover:-translate-y-0.5' >
+                            <img src={cart} className='w-8' />
+                            <h1 className='text-lg font-mono sm:flex hidden'>Cart</h1>
+                        </NavLink>
+
+                        <div className="relative group">
+                            <div
+                                className="flex items-center gap-2 cursor-pointer"
+                            >
+                                <img
+                                    src={user_profile_default}
+                                    className="w-7"
+                                />
+                                <h1 className="font-mono text-lg sm:flex hidden">Username</h1>
                             </div>
+
+                            {/* ------Dropdown Menu------ */}
+
+                            <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg group-hover:opacity-100 opacity-0 group-hover:visible invisible transition-all duration-300">
+                                <NavLink
+                                    to={"/orders"}
+                                    className="flex justify-start items-center gap-1 px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 20.249C12 20.249 2.625 14.999 2.625 8.62403C2.625 7.49705 3.01546 6.40488 3.72996 5.53334C4.44445 4.66179 5.43884 4.06472 6.54393 3.8437C7.64903 3.62268 8.79657 3.79137 9.79131 4.32106C10.7861 4.85076 11.5665 5.70874 12 6.74903V6.74903C12.4335 5.70874 13.2139 4.85076 14.2087 4.32106C15.2034 3.79137 16.351 3.62268 17.4561 3.8437C18.5612 4.06472 19.5555 4.66179 20.27 5.53334C20.9845 6.40488 21.375 7.49705 21.375 8.62403C21.375 14.999 12 20.249 12 20.249Z" stroke="#212121" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    Orders
+                                </NavLink>
+                                <NavLink
+                                    to={"/wishlist"}
+                                    className="flex justify-start items-center gap-1 px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                >
+                                    <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/orders-bfe8c4.svg" alt="" />
+                                    Wishlist
+                                </NavLink>
+                                <NavLink
+                                    to={"/login"}
+                                    className="flex mx-2 my-2 justify-center items-center py-2 bg-orange-600 hover:bg-orange-700 rounded-lg"
+                                >
+                                    Logout
+                                </NavLink>
+                            </div>
+
                         </div>
+
                     </div>
 
-                    {/* ------------------------------user details, cart and orders for smaller devices------------------------ */}
-
-                    <div className='flex sm:hidden justify-center items-center'>
-                        <div className='flex items-center gap-4 justify-center '>
-                            <NavLink to={'/cart'} className='flex items-center justify-center cursor-pointer hover:-translate-y-0.5' >
-                                <img src={cart} className='w-8' />
-                            </NavLink>
-                            <div className='flex justify-center items-center gap-2'>
-                                <div className='flex gap-1'>
-                                    <img src={user_profile_default} className='w-7' />
-                                </div>
-                                <NavLink to={'/login'} className='bg-orange-600 font-mono h-8 w-16 rounded-xl flex items-center justify-center hover:bg-orange-700 hover:shadow'>Logout</NavLink>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 {/* ------------------------------search button for smaller devices------------------------------ */}
