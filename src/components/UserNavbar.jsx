@@ -7,15 +7,16 @@ import user_profile_default from '../../public/assets/user_profile_default.png'
 const UserNavbar = () => {
 
     return (
-        <nav className='flex p-2 shadow items-center bg-blue-100 w-full'>
+        <nav className='flex p-2 shadow items-center bg-blue-100 w-full fixed'>
             <div className='flex flex-col w-full gap-2'>
                 <div className='flex justify-between'>
                     {/* ---------------------------icon---------------------------- */}
-
-                    <div className='flex gap-1 items-center w-44 '>
-                        <img src={icon} className='w-10' />
-                        <h1 className='ml-1 text-3xl font-mono'>MobKart</h1>
-                    </div>
+                    <NavLink to={'/'}>
+                        <div className='flex gap-1 items-center w-44 '>
+                            <img src={icon} className='w-10' />
+                            <h1 className='ml-1 text-3xl font-mono'>MobKart</h1>
+                        </div>
+                    </NavLink>
 
                     {/* ---------------------------search for larger devices---------------------------- */}
 
