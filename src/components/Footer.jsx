@@ -20,7 +20,7 @@ const Footer = () => {
           <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="mx-2 text-lg hover:text-blue-600">
             <i className="fab fa-facebook-f">facebook</i>
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="mx-2 text-lg hover:text-blue-400">
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="mx-2 text-lg hover:text-black">
             <i className="fab fa-twitter">x</i>
           </a>
           <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="mx-2 text-lg hover:text-pink-500">
