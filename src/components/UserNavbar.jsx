@@ -7,7 +7,7 @@ import user_profile_default from '../../public/assets/user_profile_default.png'
 const UserNavbar = () => {
 
     return (
-        <nav className='flex p-2 shadow items-center bg-blue-100 w-full fixed'>
+        <nav className='flex p-2 shadow items-center bg-blue-400 w-full fixed'>
             <div className='flex flex-col w-full gap-2'>
                 <div className='flex justify-between'>
                     {/* ---------------------------icon---------------------------- */}
