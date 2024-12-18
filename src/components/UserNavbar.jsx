@@ -35,7 +35,8 @@ const UserNavbar = () => {
                             <h1 className='text-lg font-mono sm:flex hidden'>Cart</h1>
                         </NavLink>
 
-                        <div className="relative group">
+                        {/* User Option */}
+                        {/* <div className="relative group">
                             <div
                                 className="flex items-center gap-2 cursor-pointer"
                             >
@@ -46,7 +47,7 @@ const UserNavbar = () => {
                                 <h1 className="font-mono text-lg sm:flex hidden">Username</h1>
                             </div>
 
-                            {/* ------Dropdown Menu------ */}
+                            ------Dropdown Menu------
 
                             <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg group-hover:opacity-100 opacity-0 group-hover:visible invisible transition-all duration-300">
                                 <NavLink
@@ -73,7 +74,15 @@ const UserNavbar = () => {
                                 </NavLink>
                             </div>
 
-                        </div>
+                        </div> */}
+
+                        {/* Login/Signup */}
+                        <NavLink
+                            to={"/login"}
+                            className=" w-32 flex justify-center items-center py-2 bg-orange-600 hover:bg-orange-700 rounded-lg"
+                        >
+                            Login/Signup
+                        </NavLink>
 
                     </div>
 
