@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-export const fetchProducts = async () => {
-    try {
-        const response = await axios.get("http://localhost:5000/products");
-        return response.data;
-    } catch (error) {
-        console.log("Error fetching product data: ", error);
-        throw error;
-    }
+const PRODUCT_URL = "http://localhost:5000/products";
+
+export const fetchAllProducts = async () => {
+    return axios.get(PRODUCT_URL);
+};
+
+export const fetchProductById = async (id) => {
+    return axios.get(`${PRODUCT_URL}/${id}`);
 };
