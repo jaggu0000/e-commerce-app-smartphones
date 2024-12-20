@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { addUser, checkUsername, checkEmail } from '../api/userApi'
+import { addUser, checkUsername, checkEmail, fetchUsers } from '../api/userApi'
 
 export const AuthContext = createContext();
 
@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
             if (emailExist) {
                 throw new Error("An account already exists in this email");
             }
-            
+
             const usernameExist = await checkUsername(userData.username);
             if (usernameExist) {
                 throw new Error("Username already in use.");
@@ -32,16 +32,16 @@ export const AuthProvider = ({ children }) => {
 
             const newUser = {
                 ...userData,
-                "role" : "user",
-                "block" : false
+                "role": "user",
+                "block": false
             };
 
             const response = await addUser(newUser);
             localStorage.setItem(
                 "user",
                 JSON.stringify({
-                    userId : response.data.id,
-                    username : response.data.username
+                    userId: response.data.id,
+                    username: response.data.username
                 })
             );
             setUser(newUser);
@@ -54,9 +54,35 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    const userLogin = async (userdata) => {
+    const userLogin = async (userData) => {
         try {
-            
+            const { data: users } = await fetchUsers();
+
+            const foundedUser = users.find((user) =>
+                (user.username === userData.usernameOrEmail || user.email === userData.usernameOrEmail) && user.password === userData.password
+            );
+
+            if (!foundedUser) {
+                throw new Error("Invalid Username or Password");
+            }
+
+            if (foundedUser.block) {
+                throw new Error("Your account is blocked");
+            }
+
+            localStorage.setItem(
+                foundedUser.role,
+                JSON.stringify({
+                    userId: foundedUser.id,
+                    username: foundedUser.username
+                })
+            );
+
+            setUser(foundedUser);
+            setTimeout(() => {
+                navigate("/");
+            }, 1000);
+
         } catch (error) {
             throw error;
         }
