@@ -12,6 +12,7 @@ const Signup = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const { userSignup } = useContext(AuthContext);
+  
   const handleSignup = async (e) => {
     e.preventDefault();
     setError('');
