@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { addUser, checkUsername, checkEmail } from '../api/userApi'
 
@@ -7,6 +7,16 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
     const [user, setUser] = useState([]);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+        const storedAdmin = localStorage.getItem("admin");
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        } else if (storedAdmin) {
+            setUser(JSON.parse(storedAdmin));
+        }
+    }, []);
 
     const userSignup = async (userData) => {
         try {
@@ -26,7 +36,14 @@ export const AuthProvider = ({ children }) => {
                 "block" : false
             };
 
-            await addUser(newUser);
+            const response = await addUser(newUser);
+            localStorage.setItem(
+                "user",
+                JSON.stringify({
+                    userId : response.data.id,
+                    username : response.data.username
+                })
+            );
             setUser(newUser);
             setTimeout(() => {
                 navigate("/");
@@ -37,8 +54,16 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const userLogin = async (userdata) => {
+        try {
+            
+        } catch (error) {
+            throw error;
+        }
+    };
+
     return (
-        <AuthContext.Provider value={{ user, userSignup }} >
+        <AuthContext.Provider value={{ user, userSignup, userLogin }} >
             {children}
         </AuthContext.Provider>
     )
