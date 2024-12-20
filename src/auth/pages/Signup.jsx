@@ -12,20 +12,20 @@ const Signup = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const { userSignup } = useContext(AuthContext);
-  
+
   const handleSignup = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
 
-    if (!username || !email || !password) {
-      setError('All fields are mandatory');
-      return;
-    }
 
     try {
+      if (!username || !email || !password) {
+        throw new Error("All fields are mandatory");
+      }
+
       await userSignup({ username, email, password });
-      setSuccess('Signed up succesfully')
+      setSuccess('Signed up succesfully');
     } catch (error) {
       setError(error.message);
     }
