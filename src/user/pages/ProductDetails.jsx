@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import UserNavbar from '../../components/UserNavbar';
 import Footer from '../../components/Footer';
-import axios from 'axios';
+import { fetchProductById } from '../../api/productApi';
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -13,7 +13,7 @@ const ProductDetails = () => {
     useEffect(() => {
         const fetchProductDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/products/${id}`);
+                const response = await fetchProductById(id);
                 setProduct(response.data);
             } catch (err) {
                 setError('Failed to fetch product details.');
