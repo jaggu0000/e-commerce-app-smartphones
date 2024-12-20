@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import UserNavbar from '../../components/UserNavbar'
-import { fetchProducts } from '../../api/productApi'
+import { fetchAllProducts } from '../../api/productApi'
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer';
 
@@ -14,9 +14,10 @@ const Home = () => {
 
     const loadProducts = async () => {
         try {
-            const data = await fetchProducts();
-            setProducts(data);
+            const response = await fetchAllProducts();
+            setProducts(response.data);
         } catch (error) {
+            
             setError("Failed to load Smartphones!");
         } finally {
             setLoading(false);
