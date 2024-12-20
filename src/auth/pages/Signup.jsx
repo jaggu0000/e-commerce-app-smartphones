@@ -1,22 +1,51 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
 import '../../styles/login_signup.css'
 import icon from '../../../public/assets/icon_light.png'
+import { fetchUsers } from '../../api/userApi'
+import { AuthContext } from '../../contexts/AuthContexts'
 
 const Signup = () => {
-return (
+
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const { userSignup } = useContext(AuthContext);
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSuccess('');
+
+    if (!username || !email || !password) {
+      setError('All fields are mandatory');
+      return;
+    }
+
+    try {
+      await userSignup({username, email, password});
+      setSuccess('Signed up succesfully')
+    } catch (error) {
+      setError(error.message);
+    }
+
+  }
+
+  return (
     <div className='login_signup h-screen flex justify-center items-center '>
       <div className='bg-transparent/25 h-[530px] sm:w-[350px] lg:w-[400px] rounded-2xl flex flex-col items-center justify-between'>
         <div className='bg-transparent/25 w-full flex flex-col grow items-center shadow-inner rounded-t-2xl'>
 
           <img src={icon} className='w-20 mt-9' />
 
-          <form className='flex flex-col justify-center items-center gap-4 p-10 w-full font-medium '>
-            <input type="text" className='border border-black h-10 w-full rounded-xl p-4 ' placeholder='Username' />
-            <input type="email" className='border border-black h-10 w-full rounded-xl p-4 ' placeholder='Email' />
-            <input type="password" className='border border-black h-10 w-full rounded-xl p-4' placeholder='Password' />
+          <form onSubmit={handleSignup} className='flex flex-col justify-center items-center gap-4 p-10 w-full font-medium '>
+            <input onChange={(e) => setUsername(e.target.value)} type="text" className='border border-black h-10 w-full rounded-xl p-4 ' placeholder='Username' />
+            <input onChange={(e) => setEmail(e.target.value)} type="email" className='border border-black h-10 w-full rounded-xl p-4 ' placeholder='Email' />
+            <input onChange={(e) => setPassword(e.target.value)} type="password" className='border border-black h-10 w-full rounded-xl p-4' placeholder='Password' />
             <input type="submit" value="Sign Up" className='bg-orange-600 h-10 w-full rounded-3xl mt-4 cursor-pointer hover:bg-orange-700' />
-
+            {error && <p className='text-red-600 '>{error}</p>}
+            {success && <p className='text-green-600'>{success}</p>}
           </form>
 
         </div>
