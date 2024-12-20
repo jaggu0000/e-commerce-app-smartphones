@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import '../../styles/login_signup.css'
 import icon from '../../../public/assets/icon_light.png'
-import { fetchUsers } from '../../api/userApi'
 import { AuthContext } from '../../contexts/AuthContexts'
 
 const Signup = () => {
@@ -24,7 +23,7 @@ const Signup = () => {
     }
 
     try {
-      await userSignup({username, email, password});
+      await userSignup({ username, email, password });
       setSuccess('Signed up succesfully')
     } catch (error) {
       setError(error.message);
