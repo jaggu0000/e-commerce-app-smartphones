@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import icon from '../../public/assets/icon_dark.png'
 import { NavLink } from 'react-router-dom'
 import cart from '../../public/assets/cart.png'
@@ -7,7 +7,9 @@ import { AuthContext } from '../contexts/AuthContexts'
 
 const UserNavbar = () => {
 
-    const { user, logout } = useContext(AuthContext);
+    const { logout } = useContext(AuthContext);
+    const user = localStorage.getItem("user");
+    const username = localStorage.getItem("username");
 
     return (
         <nav className='flex p-2 shadow items-center bg-blue-600 w-full fixed'>
@@ -33,60 +35,60 @@ const UserNavbar = () => {
                     {/* ----------------------------cart and user dropdown--------------------------- */}
 
                     <div className='flex items-center justify-center gap-3'>
-                        <NavLink to={'/cart'} className='flex items-center justify-center cursor-pointer hover:-translate-y-0.5' >
+                        <NavLink to="/cart" className='flex items-center justify-center cursor-pointer hover:-translate-y-0.5' >
                             <img src={cart} className='w-8' />
                             <h1 className='text-lg font-mono sm:flex hidden'>Cart</h1>
                         </NavLink>
 
 
                         {/* login/signup userOptions */}
-                        {user ? 
-                        <div className="relative group">
-                            <div
-                                className="flex items-center gap-2 cursor-pointer"
-                            >
-                                <img
-                                    src={user_profile_default}
-                                    className="w-7"
-                                />
-                                <h1 className="font-mono text-lg sm:flex hidden">Username</h1>
-                            </div>
-
-                            <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg group-hover:opacity-100 opacity-0 group-hover:visible invisible transition-all duration-300">
-                                <NavLink
-                                    to={"/orders"}
-                                    className="flex justify-start items-center gap-1 px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        {user ?
+                            <div className="relative group">
+                                <div
+                                    className="flex items-center gap-2 cursor-pointer"
                                 >
                                     <img
-                                        src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/orders-bfe8c4.svg"
+                                        src={user_profile_default}
+                                        className="w-7"
                                     />
-                                    Orders
-                                </NavLink>
-                                <NavLink
-                                    to={"/wishlist"}
-                                    className="flex justify-start items-center gap-1 px-4 py-2 text-gray-700 hover:bg-gray-100"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M12 20.249C12 20.249 2.625 14.999 2.625 8.62403C2.625 7.49705 3.01546 6.40488 3.72996 5.53334C4.44445 4.66179 5.43884 4.06472 6.54393 3.8437C7.64903 3.62268 8.79657 3.79137 9.79131 4.32106C10.7861 4.85076 11.5665 5.70874 12 6.74903V6.74903C12.4335 5.70874 13.2139 4.85076 14.2087 4.32106C15.2034 3.79137 16.351 3.62268 17.4561 3.8437C18.5612 4.06472 19.5555 4.66179 20.27 5.53334C20.9845 6.40488 21.375 7.49705 21.375 8.62403C21.375 14.999 12 20.249 12 20.249Z" stroke="#212121" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                    Wishlist
-                                </NavLink>
-                                <NavLink
-                                    onClick={logout}
-                                    className="flex mx-2 my-2 justify-center items-center py-2 bg-orange-600 hover:bg-orange-700 rounded-lg"
-                                >
-                                    Logout
-                                </NavLink>
-                            </div>
+                                    <h1 className="font-mono text-lg sm:flex hidden max-w-32">{username.length > 9 ? `${username.slice(0, 9)}...` : username}</h1>
+                                </div>
 
-                        </div>
-                        :
-                        <NavLink
-                            to={"/login"}
-                            className=" w-28 flex justify-center items-center py-2 bg-orange-600 hover:bg-orange-700 rounded-lg"
-                        >
-                            Login/Signup
-                        </NavLink>}
+                                <div className="flex flex-col absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg group-hover:opacity-100 opacity-0 group-hover:visible invisible transition-all duration-300">
+                                    <NavLink
+                                        to="/orders"
+                                        className="flex justify-start items-center gap-1 px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                    >
+                                        <img
+                                            src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/orders-bfe8c4.svg"
+                                        />
+                                        Orders
+                                    </NavLink>
+                                    <NavLink
+                                        to="/wishlist"
+                                        className="flex justify-start items-center gap-1 px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M12 20.249C12 20.249 2.625 14.999 2.625 8.62403C2.625 7.49705 3.01546 6.40488 3.72996 5.53334C4.44445 4.66179 5.43884 4.06472 6.54393 3.8437C7.64903 3.62268 8.79657 3.79137 9.79131 4.32106C10.7861 4.85076 11.5665 5.70874 12 6.74903V6.74903C12.4335 5.70874 13.2139 4.85076 14.2087 4.32106C15.2034 3.79137 16.351 3.62268 17.4561 3.8437C18.5612 4.06472 19.5555 4.66179 20.27 5.53334C20.9845 6.40488 21.375 7.49705 21.375 8.62403C21.375 14.999 12 20.249 12 20.249Z" stroke="#212121" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                        Wishlist
+                                    </NavLink>
+                                    <button
+                                        onClick={logout}
+                                        className="h-full flex mx-2 my-2 justify-center items-center py-2 bg-orange-600 hover:bg-orange-700 rounded-lg"
+                                    >
+                                        Logout
+                                    </button>
+                                </div>
+
+                            </div>
+                            :
+                            <NavLink
+                                to={"/login"}
+                                className=" w-28 flex justify-center items-center py-2 bg-orange-600 hover:bg-orange-700 rounded-lg"
+                            >
+                                Login/Signup
+                            </NavLink>}
 
                     </div>
 
