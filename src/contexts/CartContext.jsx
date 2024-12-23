@@ -6,7 +6,7 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
-    const [userData, setUserData] = useState({});
+    const [userData, setUserData] = useState(null);
     const userId = localStorage.getItem("user");
     const { user } = useContext(AuthContext);
 
@@ -22,6 +22,8 @@ export const CartProvider = ({ children }) => {
                 }
             };
             fetchData();
+        }else{
+            setCartItems([]);
         }
     }, [user]);
 

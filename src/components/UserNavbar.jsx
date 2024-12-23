@@ -4,10 +4,12 @@ import { NavLink } from 'react-router-dom'
 import cart from '../../public/assets/cart.png'
 import user_profile_default from '../../public/assets/user_profile_default.png'
 import { AuthContext } from '../contexts/AuthContexts'
+import { CartContext } from '../contexts/CartContext'
 
 const UserNavbar = () => {
 
     const { logout } = useContext(AuthContext);
+    const {cartItems} = useContext(CartContext)
     const user = localStorage.getItem("user");
     const username = localStorage.getItem("username");
 
@@ -36,7 +38,10 @@ const UserNavbar = () => {
 
                     <div className='flex items-center justify-center gap-3'>
                         <NavLink to="/cart" className='flex items-center justify-center cursor-pointer hover:-translate-y-0.5' >
-                            <img src={cart} className='w-8' />
+                            <img src={cart} className='w-8 relative' />
+                            <span className='absolute mb-8 mr-4 bg-orange-500 rounded-full w-5 h-5 flex justify-center items-center'>
+                                {cartItems && cartItems.length || 0}
+                            </span>
                             <h1 className='text-lg font-mono sm:flex hidden'>Cart</h1>
                         </NavLink>
 

@@ -12,7 +12,7 @@ const ProductDetails = () => {
     const [error, setError] = useState(null);
     const { addToCart } = useContext(CartContext);
     const user = localStorage.getItem("user");
-    const navigate = useNavigate;
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProductDetails = async () => {
@@ -69,7 +69,7 @@ const ProductDetails = () => {
 
                         <div className=' flex w-96 flex-col gap-0 mt-4 -ml-2'>
                             <button
-                                onClick={() => user? addToCart(product) : navigate("/cart")}
+                                onClick={() => user? addToCart(product) : navigate("/login")}
                                 className="flex mx-2 my-2 justify-center items-center py-2 bg-orange-600 hover:bg-orange-700 rounded-3xl"
                             >
                                 Add to cart
