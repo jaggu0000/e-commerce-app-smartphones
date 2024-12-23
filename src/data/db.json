@@ -1,12 +1,22 @@
 {
   "users": [
     {
+      "id": "e807",
+      "username": "jaggu",
+      "email": "jaggu@gmail.com",
+      "password": "jaggu",
+      "role": "admin",
+      "block": false,
+      "cart": []
+    },
+    {
       "id": "f7e7",
       "username": "harsh",
       "email": "hasrsh@goosemail.com",
       "password": "qwerty",
       "role": "user",
-      "block": false
+      "block": false,
+      "cart": []
     },
     {
       "id": "6879",
@@ -14,7 +24,92 @@
       "email": "harsh@goosemail.com",
       "password": "12345",
       "role": "user",
-      "block": false
+      "block": false,
+      "cart": []
+    },
+    {
+      "id": "1255",
+      "username": "jagan",
+      "email": "jagan@gmail.com",
+      "password": "jagan",
+      "role": "user",
+      "block": false,
+      "cart": [
+        {
+          "id": "9",
+          "name": "Nothing Phone (2)",
+          "brand": "Nothing",
+          "price": 44999,
+          "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/u/m/b/-original-imagrdefbw6bhbjr.jpeg?q=70",
+          "rating": 4.2,
+          "description": "6.7-inch OLED display, Snapdragon 8+ Gen 1, unique Glyph Interface, and 50MP dual cameras.",
+          "specification": {
+            "display": "6.7-inch OLED",
+            "processor": "Snapdragon 8+ Gen 1",
+            "ram": "8GB",
+            "camera": "50MP (Dual Camera)",
+            "battery": "4700mAh with 45W fast charging",
+            "storage": "128GB UFS 3.1",
+            "os": "Android 13"
+          },
+          "quantity": 1
+        },
+        {
+          "id": "2",
+          "name": "Samsung Galaxy S23 Ultra",
+          "brand": "Samsung",
+          "price": 124999,
+          "image": "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/u/a/l/-original-imagzm8qrfdmhy8z.jpeg?q=70&crop=false",
+          "rating": 4.7,
+          "description": "6.8-inch Dynamic AMOLED 2X display, Snapdragon 8 Gen 2, 200MP camera, and S Pen compatibility.",
+          "specification": {
+            "display": "6.8-inch Dynamic AMOLED 2X",
+            "processor": "Snapdragon 8 Gen 2",
+            "ram": "12GB",
+            "camera": "200MP quad camera",
+            "battery": "5000mAh",
+            "storage": "256GB/512GB/1TB",
+            "os": "Android 13"
+          },
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "id": "517f",
+      "username": "jaggu1",
+      "email": "jaggu1@gmail.com",
+      "password": "jaggu1",
+      "role": "user",
+      "block": false,
+      "cart": []
+    },
+    {
+      "id": "f3a0",
+      "username": "harshaa",
+      "email": "harsh@g.co",
+      "password": "harsh",
+      "role": "user",
+      "block": false,
+      "cart": []
+    },
+    {
+      "id": "edad",
+      "username": "hsrsha",
+      "email": "hsraha@g.co",
+      "password": "hsrasha",
+      "role": "user",
+      "block": false,
+      "cart": []
+    },
+    {
+      "id": "9e3e",
+      "username": "sasi",
+      "email": "sasi@gmail.co",
+      "password": "sasi",
+      "role": "user",
+      "block": false,
+      "cart": []
     }
   ],
   "products": [
