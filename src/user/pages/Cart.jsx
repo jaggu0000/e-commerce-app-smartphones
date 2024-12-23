@@ -1,47 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import UserNavbar from '../../components/UserNavbar';
 import Footer from '../../components/Footer';
+import { CartContext } from '../../contexts/CartContext';
+import delete_icon from '../../../public/assets/delete_icon.png'
 
 const Cart = () => {
-  // Sample cart items
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 9,
-      name: 'Nothing Phone (2)',
-      brand: 'Nothing',
-      price: 44999,
-      image: 'https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/u/m/b/-original-imagrdefbw6bhbjr.jpeg?q=70',
-      quantity: 1,
-    },
-    {
-      id: 10,
-      name: 'Motorola Edge 40 Pro',
-      brand: 'Motorola',
-      price: 79999,
-      image: 'https://motorolaroe.vtexassets.com/arquivos/ids/157285/motorola-edge-40-pro-family-shelf-quartz-black-b5pgv2pv.png?v=638162154256500000',
-      quantity: 2,
-    },
-  ]);
-
+  const { cartItems, updateQuantity, removeFromCart, totalPrice } = useContext(CartContext);
   const navigate = useNavigate();
-
-  // Function to handle quantity change
-  const updateQuantity = (id, amount) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id
-          ? { ...item, quantity: Math.max(item.quantity + amount, 1) }
-          : item
-      )
-    );
-  };
-
-  // Calculate total price
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
 
   return (
     <>
@@ -87,17 +53,23 @@ const Cart = () => {
                       <p className="text-green-600 font-semibold">₹{item.price}</p>
                       <div className="flex items-center gap-2 mt-2">
                         <button
-                          onClick={() => updateQuantity(item.id, -1)}
+                          onClick={() => item.quantity === 1 ? null : updateQuantity(item.id, item.quantity - 1)}
                           className="px-2 py-1 bg-gray-300 rounded"
                         >
                           -
                         </button>
                         <span>{item.quantity}</span>
                         <button
-                          onClick={() => updateQuantity(item.id, 1)}
+                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
                           className="px-2 py-1 bg-gray-300 rounded"
                         >
                           +
+                        </button>
+                        <button
+                          onClick={() => removeFromCart(item.id)}
+                          className='w-6'
+                        >
+                          <img src={delete_icon} alt="delete" />
                         </button>
                       </div>
                     </div>
