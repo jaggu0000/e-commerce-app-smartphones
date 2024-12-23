@@ -1,31 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import UserNavbar from '../../components/UserNavbar';
 import Footer from '../../components/Footer';
+import { fetchOrderById } from '../../api/orderApi';
 
 const Orders = () => {
-  // Sample order data (replace this with data fetched from an API or database)
-  const [orders] = useState([
-    {
-      id: 1,
-      items: [
-        { name: 'Nothing Phone (2)', quantity: 1, price: 44999 },
-        { name: 'Motorola Edge 40 Pro', quantity: 2, price: 79999 },
-      ],
-      total: 204997,
-      status: 'Shipped',
-      orderDate: '2024-12-15',
-    },
-    {
-      id: 2,
-      items: [
-        { name: 'Motorola Edge 40 Pro', quantity: 1, price: 79999 },
-      ],
-      total: 79999,
-      status: 'Processing',
-      orderDate: '2024-12-16',
-    },
+  const [orders, setOrders] = useState([]);
+  const userId = localStorage.getItem("user");
 
-  ]);
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const response = await fetchOrderById(userId);
+        setOrders(response.data);
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    fetchCart();
+
+  }, []);
+
 
   return (
     <>
@@ -45,16 +39,16 @@ const Orders = () => {
                 >
                   <div className="mb-4">
                     <h2 className="text-xl font-semibold">Order #{order.id}</h2>
-                    <p className="text-gray-600 text-sm">Date: {order.orderDate}</p>
+                    <p className="text-gray-600 text-sm">Date: {order.date}</p>
                     <p className="text-gray-600 text-sm">
-                      Status: <span className="font-medium">{order.status}</span>
+                      Status: <span className="font-medium">{order.orderStatus}</span>
                     </p>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-medium mb-2">Items:</h3>
                     <ul className="divide-y divide-gray-300">
-                      {order.items.map((item, index) => (
+                      {order.products.map((item, index) => (
                         <li
                           key={index}
                           className="flex justify-between py-2 text-gray-700"
