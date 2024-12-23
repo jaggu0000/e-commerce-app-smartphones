@@ -6,17 +6,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
-    const [user, setUser] = useState([]);
-
-    useEffect(() => {
-        const storedUser = localStorage.getItem("user");
-        const storedAdmin = localStorage.getItem("admin");
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        } else if (storedAdmin) {
-            setUser(JSON.parse(storedAdmin));
-        }
-    }, []);
+    const [user, setUser] = useState(null);
 
     const userSignup = async (userData) => {
         try {
@@ -33,18 +23,16 @@ export const AuthProvider = ({ children }) => {
             const newUser = {
                 ...userData,
                 "role": "user",
-                "block": false
+                "block": false,
+                "cart": []
             };
 
             const response = await addUser(newUser);
-            localStorage.setItem(
-                "user",
-                JSON.stringify({
-                    userId: response.data.id,
-                    username: response.data.username
-                })
-            );
+            localStorage.setItem("user", response.data.id );
+            localStorage.setItem("username", response.data.username );
+            localStorage.setItem("role", "user");
             setUser(newUser);
+
             setTimeout(() => {
                 navigate("/");
             }, 1000);
@@ -69,14 +57,9 @@ export const AuthProvider = ({ children }) => {
             if (foundedUser.block) {
                 throw new Error("Your account is blocked");
             }
-
-            localStorage.setItem(
-                foundedUser.role,
-                JSON.stringify({
-                    userId: foundedUser.id,
-                    username: foundedUser.username
-                })
-            );
+            localStorage.setItem("user", foundedUser.id );
+            localStorage.setItem("username", foundedUser.username );
+            localStorage.setItem("role", foundedUser.role)
 
             setUser(foundedUser);
             setTimeout(() => {
@@ -88,8 +71,16 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const logout = () => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("username");
+        localStorage.removeItem("role");
+        setUser(null);
+        navigate('/');
+    };
+
     return (
-        <AuthContext.Provider value={{ user, userSignup, userLogin }} >
+        <AuthContext.Provider value={{ user, userSignup, userLogin, logout }} >
             {children}
         </AuthContext.Provider>
     )
