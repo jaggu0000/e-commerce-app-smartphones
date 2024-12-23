@@ -6,7 +6,7 @@ import { CartContext } from '../../contexts/CartContext';
 import delete_icon from '../../../public/assets/delete_icon.png'
 
 const Cart = () => {
-  const { cartItems, updateQuantity, removeFromCart, totalPrice } = useContext(CartContext);
+  const { cartItems, updateQuantity, removeFromCart, totalPrice, getTotalPriceOfProduct } = useContext(CartContext);
   const navigate = useNavigate();
 
   return (
@@ -50,7 +50,9 @@ const Cart = () => {
                     <div className="flex-1">
                       <h2 className="text-lg font-bold">{item.name}</h2>
                       <p className="text-gray-600">Brand: {item.brand}</p>
-                      <p className="text-green-600 font-semibold">₹{item.price}</p>
+                      <span className="text-green-600 font-semibold">₹{item.price}</span>
+                      <span className='text-slate-500'> {`x ${item.quantity} = `}</span>
+                      <span className="text-green-600 font-semibold">{`₹${getTotalPriceOfProduct(item)}`}</span>
                       <div className="flex items-center gap-2 mt-2">
                         <button
                           onClick={() => item.quantity === 1 ? null : updateQuantity(item.id, item.quantity - 1)}

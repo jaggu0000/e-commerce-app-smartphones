@@ -42,35 +42,33 @@ export const CartProvider = ({ children }) => {
         let updatedData;
         if (existingItem) {
             updatedData = cartItems.map((item) => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item)
-            
+
         } else {
             updatedData = [...cartItems, { ...product, quantity: 1 }];
         }
         updateCartData(updatedData)
     };
-    
-    
+
     const removeFromCart = (id) => {
         const removedCart = cartItems.filter((cartItem) => cartItem.id !== id);
         updateCartData(removedCart);
     };
-    
+
     const updateQuantity = (productId, quantity) => {
         const newQuantity = cartItems.map((product) => {
             return product.id === productId ? { ...product, quantity } : product
         })
-        
         updateCartData(newQuantity);
     };
-    
-    const totalPrice = cartItems.reduce(
-        (total, item) => total + item.price * item.quantity,
-        0
-    );
-    
+
+    const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    const getTotalPriceOfProduct = (item) => {
+        return item.price * item.quantity;
+    }
+
     return (
         <CartContext.Provider
-            value={{ cartItems, addToCart, removeFromCart, updateQuantity, totalPrice }}
+            value={{ cartItems, addToCart, removeFromCart, updateQuantity, totalPrice, getTotalPriceOfProduct }}
         >
             {children}
         </CartContext.Provider>
