@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import icon from '../../public/assets/icon_dark.png'
 import { NavLink } from 'react-router-dom'
-import cart from '../../public/assets/cart.png'
 import user_profile_default from '../../public/assets/user_profile_default.png'
 
 const UserNavbar = () => {
+  const adminName = localStorage.getItem("username")
 
   return (
-    <nav className='flex p-2 shadow items-center bg-blue-400 w-full fixed'>
+    <nav className='flex p-2 shadow items-center bg-blue-600 w-full fixed'>
       <div className='flex flex-col w-full gap-2'>
         <div className='flex justify-between'>
           {/* ---------------------------icon---------------------------- */}
@@ -31,7 +31,7 @@ const UserNavbar = () => {
                   src={user_profile_default}
                   className="w-7"
                 />
-                <h1 className="font-mono text-lg sm:flex hidden">Admin</h1>
+                <h1 className="font-mono text-lg sm:flex hidden">{adminName}</h1>
               </div>
 
               {/* ------Dropdown Menu------ */}
