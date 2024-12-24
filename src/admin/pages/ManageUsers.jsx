@@ -47,7 +47,6 @@ const ManageUsers = () => {
                                     <th className="p-3">User Id</th>
                                     <th className="p-3">Name</th>
                                     <th className="p-3">Email</th>
-                                    <th className="p-3">Block</th>
                                     <th className="p-3">Actions</th>
                                 </tr>
                             </thead>
@@ -58,7 +57,6 @@ const ManageUsers = () => {
                                         <td className="p-3">{user.id}</td>
                                         <td className="p-3">{user.username}</td>
                                         <td className="p-3">{user.email}</td>
-                                        <td className="p-3">{user.block.toString()}</td>
                                         <td className="p-3 flex justify-center items-center">
                                             <button
                                                 onClick={() => handleToggle(user.id)}
