@@ -74,12 +74,6 @@ const ProductDetails = () => {
                             >
                                 Add to cart
                             </button>
-                            <NavLink
-                                to={'/checkout'}
-                                className="flex mx-2 my-2 justify-center items-center py-2 bg-orange-600 hover:bg-orange-700 rounded-3xl"
-                            >
-                                Buy Now
-                            </NavLink>
                         </div>
 
                         <p className="text-gray-700 mb-4">{product.description}</p>
