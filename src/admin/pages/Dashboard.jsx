@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AdminNavbar from '../../components/AdminNavbar';
 import { useNavigate } from 'react-router-dom';
+import { AdminContext } from '../../contexts/AdminContexts';
 
 const Dashboard = () => {
 
     const navigate = useNavigate();
+    const { totalUsers, totalProducts, totalOrders, totalRevenue } = useContext(AdminContext);
 
     return (
         <>
@@ -13,38 +15,27 @@ const Dashboard = () => {
                 <div className="container mx-auto">
                     <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
 
-                    {/* Management Links */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="p-4 bg-blue-500 text-white rounded-lg shadow-md text-center hover:bg-blue-600 hover:shadow-lg transition cursor-pointer"
-                            onClick={() => navigate('/manageusers')}>
-                            <h3 className="text-lg font-medium">Manage Users</h3>
-                            <p>View and edit user accounts</p>
-                        </div>
-                        <div className="p-4 bg-green-500 text-white rounded-lg shadow-md text-center hover:bg-green-600 hover:shadow-lg transition cursor-pointer"
-                            onClick={() => navigate('/manageproducts')}>
-                            <h3 className="text-lg font-medium">Manage Products</h3>
-                            <p>Add, edit, or remove products</p>
-                        </div>
-                        <div className="p-4 bg-yellow-500 text-white rounded-lg shadow-md text-center hover:bg-yellow-600 hover:shadow-lg transition cursor-pointer"
-                            onClick={() => navigate('/vieworders')}>
-                            <h3 className="text-lg font-medium">View Orders</h3>
-                            <p>Track and update order statuses</p>
-                        </div>
-                    </div>
-
                     {/* Statistics Section */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                        <div className="p-4 bg-white shadow-md rounded-lg text-center">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 ">
+                        <div className="p-4 bg-blue-300 hover:bg-blue-400 shadow-md rounded-lg text-center cursor-pointer hover:shadow-xl transition duration-300"
+                            onClick={() => navigate('/manageusers')}>
                             <h2 className="text-xl font-semibold mb-2">Total Users</h2>
-                            <p className="text-3xl font-bold">1,234</p>
+                            <p className="text-3xl font-bold">{totalUsers}</p>
                         </div>
-                        <div className="p-4 bg-white shadow-md rounded-lg text-center">
+                        <div className="p-4 bg-orange-300 hover:bg-orange-400 shadow-md rounded-lg text-center cursor-pointer hover:shadow-xl transition duration-300"
+                            onClick={() => navigate('/manageproducts')}>
                             <h2 className="text-xl font-semibold mb-2">Total Products</h2>
-                            <p className="text-3xl font-bold">456</p>
+                            <p className="text-3xl font-bold">{totalProducts}</p>
                         </div>
-                        <div className="p-4 bg-white shadow-md rounded-lg text-center">
+                        <div className="p-4 bg-violet-300 hover:bg-violet-400 shadow-md rounded-lg text-center cursor-pointer hover:shadow-xl transition duration-300"
+                            onClick={() => navigate('/vieworders')}>
                             <h2 className="text-xl font-semibold mb-2">Total Orders</h2>
-                            <p className="text-3xl font-bold">789</p>
+                            <p className="text-3xl font-bold">{totalOrders}</p>
+                        </div>
+                        <div className='hidden lg:flex'></div>
+                        <div className="p-4 bg-green-300 shadow-md rounded-lg text-center">
+                            <h2 className="text-xl font-semibold mb-2">Total Revenue</h2>
+                            <p className="text-3xl font-bold">₹{totalRevenue}</p>
                         </div>
                     </div>
 
