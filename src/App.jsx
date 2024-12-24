@@ -7,11 +7,9 @@ import Signup from './auth/pages/Signup';
 import Home from './user/pages/Home';
 import ProductDetails from './user/pages/ProductDetails';
 
-import Cart from './user/pages/Cart';
-import UserProtectedRoutes from './user/UserProtectedRoutes';
-import Checkout from './user/pages/Checkout';
-import Orders from './user/pages/Orders';
+import UserProtectedRoutes from './user/routes/UserProtectedRoutes';
 import { CartProvider } from './contexts/CartContext';
+import UserRoutes from './user/routes/UserRoutes';
 
 const App = () => {
 
@@ -25,30 +23,11 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/products/:id' element={<ProductDetails />} />
 
-          <Route
-            path="/cart"
-            element={
-              <UserProtectedRoutes>
-                <Cart />
-              </UserProtectedRoutes>
-            }
-          />
-          <Route
-            path="/orders"
-            element={
-              <UserProtectedRoutes>
-                <Orders />
-              </UserProtectedRoutes>
-            }
-          />
-          <Route
-            path="/checkout"
-            element={
-              <UserProtectedRoutes>
-                <Checkout />
-              </UserProtectedRoutes>
-            }
-          />
+          <Route element={<UserProtectedRoutes />} >
+            {UserRoutes.map(({ path, element }, index) => (
+              <Route key={index} path={path} element={element} />
+            ))}
+          </Route>
 
         </Routes>
       </CartProvider>
