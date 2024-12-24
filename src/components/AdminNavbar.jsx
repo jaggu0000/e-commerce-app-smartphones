@@ -1,16 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import icon from '../../public/assets/icon_dark.png'
 import user_profile_default from '../../public/assets/user_profile_default.png'
 import users from '../../public/assets/users.png'
 import products from '../../public/assets/products.png'
 import order_box from '../../public/assets/order_box.png'
+import { AuthContext } from '../contexts/AuthContexts'
 
 const UserNavbar = () => {
   const adminName = localStorage.getItem("username")
+  const { logout } = useContext(AuthContext);
+
 
   return (
-    <nav className='flex p-2 shadow items-center bg-blue-600 w-full fixed'>
+    <nav className='flex p-2 shadow items-center bg-blue-200 w-full fixed'>
       <div className='flex flex-col w-full gap-2'>
         <div className='flex justify-between gap-8'>
           {/* ---------------------------icon---------------------------- */}
@@ -55,13 +58,13 @@ const UserNavbar = () => {
 
                 {/* ------Dropdown Menu------ */}
 
-                <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg group-hover:opacity-100 opacity-0 group-hover:visible invisible transition-all duration-300">
-                  <NavLink
-                    to={"/login"}
-                    className="flex mx-2 my-2 justify-center items-center py-2 bg-orange-600 hover:bg-orange-700 rounded-lg"
+                <div className=" flex flex-col absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg group-hover:opacity-100 opacity-0 group-hover:visible invisible transition-all duration-300">
+                  <button
+                    onClick={logout}
+                    className="h-full flex mx-2 my-2 justify-center items-center py-2 bg-orange-600 hover:bg-orange-700 rounded-lg"
                   >
                     Logout
-                  </NavLink>
+                  </button>
                 </div>
 
               </div>
