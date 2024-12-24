@@ -14,23 +14,24 @@ const Cart = () => {
       <UserNavbar />
       <div className="min-h-screen flex flex-col pt-10">
         <div className="container mx-auto p-6">
-          <div className="mt-6">
-            <h2 className="text-xl font-bold">Total Price: ₹{totalPrice}</h2>
-            <div className="mt-4 flex gap-4">
-              <NavLink
-                to="/checkout"
-                className="px-4 py-2  text-white rounded-lg bg-orange-600 hover:bg-orange-700 "
-              >
-                Proceed to Checkout
-              </NavLink>
-              <NavLink
-                to="/"
-                className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
-              >
-                Continue Shopping
-              </NavLink>
-            </div>
-          </div>
+          {cartItems.length > 0 &&
+            <div className="mt-6">
+              <h2 className="text-xl font-bold">Total Price: ₹{totalPrice}</h2>
+              <div className="mt-4 flex gap-4">
+                <NavLink
+                  to="/checkout"
+                  className="px-4 py-2  text-white rounded-lg bg-orange-600 hover:bg-orange-700 "
+                >
+                  Proceed to Checkout
+                </NavLink>
+                <NavLink
+                  to="/"
+                  className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
+                >
+                  Continue Shopping
+                </NavLink>
+              </div>
+            </div>}
 
           <h1 className="text-3xl font-bold mt-6 mb-4">Your Cart</h1>
           {cartItems.length > 0 ? (
@@ -84,7 +85,7 @@ const Cart = () => {
               <h2 className="text-xl font-semibold mb-4">Your cart is empty</h2>
               <NavLink
                 to="/"
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-blue-700"
               >
                 Start Shopping
               </NavLink>
