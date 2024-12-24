@@ -16,6 +16,11 @@ export const checkEmail = async (email) => {
 }
 
 export const checkUsername = async (username) => {
-    const {data : users} = await fetchUsers();
+    const { data: users } = await fetchUsers();
     return users.some((user) => user.username === username)
+}
+
+export const blockUser = async (id) => {
+    const { data: user } = await axios.get(`${USER_URL}/${id}`);
+    return axios.patch(`${USER_URL}/${id}`, { block: !user.block });
 }
