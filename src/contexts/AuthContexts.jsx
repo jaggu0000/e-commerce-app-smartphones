@@ -28,8 +28,8 @@ export const AuthProvider = ({ children }) => {
             };
 
             const response = await addUser(newUser);
-            localStorage.setItem("user", response.data.id );
-            localStorage.setItem("username", response.data.username );
+            localStorage.setItem("user", response.data.id);
+            localStorage.setItem("username", response.data.username);
             localStorage.setItem("role", "user");
             setUser(newUser);
 
@@ -57,14 +57,20 @@ export const AuthProvider = ({ children }) => {
             if (foundedUser.block) {
                 throw new Error("Your account is blocked");
             }
-            localStorage.setItem("user", foundedUser.id );
-            localStorage.setItem("username", foundedUser.username );
+            localStorage.setItem("user", foundedUser.id);
+            localStorage.setItem("username", foundedUser.username);
             localStorage.setItem("role", foundedUser.role)
 
             setUser(foundedUser);
-            setTimeout(() => {
-                navigate("/");
-            }, 1000);
+            if (foundedUser.role === "user") {
+                setTimeout(() => {
+                    navigate("/");
+                }, 1000);
+            } else if (foundedUser.role === "admin") {
+                setTimeout(() => {
+                    navigate("/dashboard");
+                }, 1000);
+            }
 
         } catch (error) {
             throw error;
