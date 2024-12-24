@@ -13,6 +13,7 @@ import UserProtectedRoutes from './user/routes/UserProtectedRoutes';
 import UserRoutes from './user/routes/UserRoutes';
 import AdminProtectedRoutes from './admin/routes/AdminProtectedRoutes';
 import AdminRoutes from './admin/routes/AdminRoutes';
+import { AdminProvider } from './contexts/AdminContexts';
 
 
 const App = () => {
@@ -20,29 +21,31 @@ const App = () => {
   return (
     <AuthProvider>
       <CartProvider>
-        <Routes>
-          {/* Public routes */}
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/' element={<Home />} />
-          <Route path='/products/:id' element={<ProductDetails />} />
-          <Route path='*' element={<PageNotFound />} />
+        <AdminProvider>
+          <Routes>
+            {/* Public routes */}
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/' element={<Home />} />
+            <Route path='/products/:id' element={<ProductDetails />} />
+            <Route path='*' element={<PageNotFound />} />
 
-          {/* User routes */}
-          <Route element={<UserProtectedRoutes />} >
-            {UserRoutes.map(({ path, element }, index) => (
-              <Route key={index} path={path} element={element} />
-            ))} 
-          </Route>
+            {/* User routes */}
+            <Route element={<UserProtectedRoutes />} >
+              {UserRoutes.map(({ path, element }, index) => (
+                <Route key={index} path={path} element={element} />
+              ))}
+            </Route>
 
-          {/* Admin routes */}
-          <Route element={<AdminProtectedRoutes />} >
-            {AdminRoutes.map(({ path, element }, index) => (
-              <Route key={index} path={path} element={element} />
-            ))}
-          </Route>
+            {/* Admin routes */}
+            <Route element={<AdminProtectedRoutes />} >
+              {AdminRoutes.map(({ path, element }, index) => (
+                <Route key={index} path={path} element={element} />
+              ))}
+            </Route>
 
-        </Routes>
+          </Routes>
+        </AdminProvider>
       </CartProvider>
     </AuthProvider>
   )
