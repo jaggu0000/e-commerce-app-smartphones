@@ -2,7 +2,7 @@ import React from 'react';
 import AdminNavbar from '../../components/AdminNavbar';
 import { NavLink } from 'react-router-dom';
 
-const Products = () => {
+const ManageProducts = () => {
     // Example smartphone data
     const products = [
         { id: 1, name: 'iPhone 14 Pro Max', price: '₹1,39,900', stock: 15 },
@@ -67,4 +67,4 @@ const Products = () => {
     );
 };
 
-export default Products;
+export default ManageProducts;

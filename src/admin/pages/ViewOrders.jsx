@@ -1,7 +1,7 @@
 import React from 'react';
 import AdminNavbar from '../../components/AdminNavbar';
 
-const ManageOrders = () => {
+const ViewOrders = () => {
     return (
         <>
             <AdminNavbar />
@@ -52,4 +52,4 @@ const ManageOrders = () => {
     );
 };
 
-export default ManageOrders;
+export default ViewOrders;

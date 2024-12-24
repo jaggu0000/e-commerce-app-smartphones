@@ -16,18 +16,18 @@ const Dashboard = () => {
                     {/* Management Links */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="p-4 bg-blue-500 text-white rounded-lg shadow-md text-center hover:bg-blue-600 hover:shadow-lg transition cursor-pointer"
-                            onClick={() => navigate('/admin/users')}>
+                            onClick={() => navigate('/manageusers')}>
                             <h3 className="text-lg font-medium">Manage Users</h3>
                             <p>View and edit user accounts</p>
                         </div>
                         <div className="p-4 bg-green-500 text-white rounded-lg shadow-md text-center hover:bg-green-600 hover:shadow-lg transition cursor-pointer"
-                            onClick={() => navigate('/admin/products')}>
+                            onClick={() => navigate('/manageproducts')}>
                             <h3 className="text-lg font-medium">Manage Products</h3>
                             <p>Add, edit, or remove products</p>
                         </div>
                         <div className="p-4 bg-yellow-500 text-white rounded-lg shadow-md text-center hover:bg-yellow-600 hover:shadow-lg transition cursor-pointer"
-                            onClick={() => navigate('/admin/orders')}>
-                            <h3 className="text-lg font-medium">Manage Orders</h3>
+                            onClick={() => navigate('/vieworders')}>
+                            <h3 className="text-lg font-medium">View Orders</h3>
                             <p>Track and update order statuses</p>
                         </div>
                     </div>
