@@ -11,6 +11,7 @@ export const AdminProvider = ({ children }) => {
   const [totalProducts, setTotalProducts] = useState(0);
   const [totalOrders, setTotalOrders] = useState(0);
   const [totalRevenue, setTotalRevenue] = useState(0);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
 
@@ -58,10 +59,20 @@ export const AdminProvider = ({ children }) => {
     }
     fetchTotalRevenue();
 
+    const fetchOrders = async () => {
+      try {
+        const { data: allOrders } = await fetchAllOrders();
+        setOrders(allOrders);
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    fetchOrders();
+
   }, []);
 
   return (
-    <AdminContext.Provider value={{ totalUsers, totalProducts, totalOrders, totalRevenue }} >
+    <AdminContext.Provider value={{ totalUsers, totalProducts, totalOrders, totalRevenue, orders }} >
       {children}
     </AdminContext.Provider>
   )
