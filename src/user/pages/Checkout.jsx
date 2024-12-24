@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { CartContext } from '../../contexts/CartContext';
 import { addNewOrder } from '../../api/orderApi';
 
@@ -7,6 +7,10 @@ const Checkout = () => {
     const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate();
     const { cartItems, clearCart } = useContext(CartContext);
+
+    if (cartItems.length === 0) {
+        navigate('/cart')
+    }
 
     const [formData, setFormData] = useState({
         name: '',
