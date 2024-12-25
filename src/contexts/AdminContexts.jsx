@@ -115,7 +115,7 @@ export const AdminProvider = ({ children }) => {
   }
 
   return (
-    <AdminContext.Provider value={{ totalUsers, totalProducts, totalOrders, totalRevenue, orders, products, addproducts, deleteProductById }} >
+    <AdminContext.Provider value={{ totalUsers, totalProducts, totalOrders, totalRevenue, orders, products, addproducts, deleteProductById, setProducts }} >
       {children}
     </AdminContext.Provider>
   )

@@ -1,33 +1,93 @@
- 
-import React, { useState } from "react";
+
+import React, { useContext, useEffect, useState } from "react";
 import AdminNavbar from '../../components/AdminNavbar';
-import { NavLink } from "react-router-dom";
+import { editProduct, fetchAllProducts, fetchProductById } from "../../api/productApi";
+import { useNavigate } from "react-router-dom";
+import { AdminContext } from "../../contexts/AdminContexts";
 
 const EditProduct = () => {
+
+    const productId = localStorage.getItem("productId");
+    const { setProducts } = useContext(AdminContext);
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
+        id: "",
         name: "",
         brand: "",
         price: "",
         image: "",
         rating: "",
         description: "",
-        display: "",
-        processor: "",
-        ram: "",
-        camera: "",
-        battery: "",
-        storage: "",
-        os: "",
+        specification: {
+            display: "",
+            processor: "",
+            ram: "",
+            camera: "",
+            battery: "",
+            storage: "",
+            os: "",
+        },
     });
+
+    useEffect(() => {
+        const fetchingProduct = async () => {
+            try {
+                const { data: response } = await fetchProductById(productId);
+                console.log(response)
+                setFormData({
+                    id: response.id || "",
+                    name: response.name || "",
+                    brand: response.brand || "",
+                    price: response.price || "",
+                    image: response.image || "",
+                    rating: response.rating || "",
+                    description: response.description || "",
+                    specification: {
+                        display: response.specification.display || "",
+                        processor: response.specification.processor || "",
+                        ram: response.specification.ram || "",
+                        camera: response.specification.camera || "",
+                        battery: response.specification.battery || "",
+                        storage: response.specification.storage || "",
+                        os: response.specification.os || "",
+                    }
+                });
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        fetchingProduct();
+    }, [])
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        if (name in formData.specification) {
+            setFormData(prevState => ({
+                ...prevState,
+                specification: {
+                    ...prevState.specification,
+                    [name]: value
+                }
+            }));
+        } else {
+            setFormData(prevState => ({
+                ...prevState,
+                [name]: value
+            }));
+        }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        
+        try {
+            await editProduct(productId, formData);
+            const { data: response } = await fetchAllProducts();
+            setProducts(response);
+            navigate('/manageproducts');
+        } catch (error) {
+            console.error(error)
+        }
     };
 
     return (
@@ -139,7 +199,7 @@ const EditProduct = () => {
 
                         {/* Specifications */}
                         <div className="grid grid-cols-2 gap-4">
-                            {["display", "processor", "ram", "camera", "battery", "storage", "os"].map((field) => (
+                            {Object.keys(formData.specification).map((field) => (
                                 <div key={field}>
                                     <label className="block text-gray-600 font-medium mb-1 capitalize">
                                         {field}
@@ -147,7 +207,7 @@ const EditProduct = () => {
                                     <input
                                         type="text"
                                         name={field}
-                                        value={formData[field]}
+                                        value={formData.specification[field]}
                                         onChange={handleChange}
                                         className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                                         placeholder={`Enter ${field}`}
@@ -159,13 +219,12 @@ const EditProduct = () => {
 
                         {/* Submit Button */}
                         <div className="text-center">
-                            <NavLink
-                                to={'/manageproducts'}
+                            <button
                                 type="submit"
                                 className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700"
                             >
                                 Save Changes
-                            </NavLink>
+                            </button>
                         </div>
                     </form>
                 </div>
