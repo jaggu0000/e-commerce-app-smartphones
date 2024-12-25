@@ -1,9 +1,13 @@
- 
-import React, { useState } from "react";
+
+import React, { useContext, useState } from "react";
 import AdminNavbar from '../../components/AdminNavbar';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AdminContext } from "../../contexts/AdminContexts";
 
 const AddProduct = () => {
+    const { addproducts } = useContext(AdminContext);
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         name: "",
         brand: "",
@@ -25,10 +29,14 @@ const AddProduct = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form Data Submitted: ", formData);
-        // Add logic to send data to backend or update state
+        try {
+            await addproducts(formData);
+            navigate('/manageproducts')
+        } catch (error) {
+            console.error(error)
+        }
     };
 
     return (
@@ -160,13 +168,12 @@ const AddProduct = () => {
 
                         {/* Submit Button */}
                         <div className="text-center">
-                            <NavLink
-                                to={'/admin/products'}
+                            <button
                                 type="submit"
                                 className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700"
                             >
                                 Add Product
-                            </NavLink>
+                            </button>
                         </div>
                     </form>
                 </div>
