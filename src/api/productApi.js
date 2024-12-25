@@ -9,3 +9,12 @@ export const fetchAllProducts = async () => {
 export const fetchProductById = async (id) => {
     return axios.get(`${PRODUCT_URL}/${id}`);
 };
+
+export const addNewProduct = (newProduct) => {
+    return axios.post(PRODUCT_URL, newProduct);
+}
+
+export const deleteProduct = async (id) => {
+    await axios.delete(`${PRODUCT_URL}/${id}`);
+    return await fetchAllProducts();
+}

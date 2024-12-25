@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { fetchUsers } from '../api/userApi';
-import { fetchAllProducts } from '../api/productApi';
+import { addNewProduct, deleteProduct, fetchAllProducts } from '../api/productApi';
 import { fetchAllOrders } from '../api/orderApi';
 
 export const AdminContext = createContext();
@@ -12,6 +12,7 @@ export const AdminProvider = ({ children }) => {
   const [totalOrders, setTotalOrders] = useState(0);
   const [totalRevenue, setTotalRevenue] = useState(0);
   const [orders, setOrders] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
 
@@ -69,10 +70,52 @@ export const AdminProvider = ({ children }) => {
     }
     fetchOrders();
 
+    const fetchProducts = async () => {
+      try {
+        const { data: allProducts } = await fetchAllProducts();
+        setProducts(allProducts);
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    fetchProducts();
+
   }, []);
 
+  const addproducts = async (product) => {
+    const newProduct = {
+      id: `P${Date.now().toString()}`,
+      name: product.name,
+      brand: product.brand,
+      price: product.price,
+      image: product.image,
+      rating: product.rating,
+      description: product.description,
+      specification: {
+        display: product.display,
+        processor: product.processor,
+        ram: product.ram,
+        camera: product.camera,
+        battery: product.battery,
+        storage: product.storage,
+        os: product.os
+      }
+    }
+    try {
+      const { data: response } = await addNewProduct(newProduct);
+      setProducts((prev) => [...prev, response])
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const deleteProductById = async (id) => {
+    const { data: response} = await deleteProduct(id);
+    setProducts(response);
+  }
+
   return (
-    <AdminContext.Provider value={{ totalUsers, totalProducts, totalOrders, totalRevenue, orders }} >
+    <AdminContext.Provider value={{ totalUsers, totalProducts, totalOrders, totalRevenue, orders, products, addproducts, deleteProductById }} >
       {children}
     </AdminContext.Provider>
   )
