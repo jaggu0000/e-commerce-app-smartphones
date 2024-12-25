@@ -2,11 +2,37 @@ import React, { useContext, useEffect, useState } from 'react';
 import AdminNavbar from '../../components/AdminNavbar';
 import { useNavigate } from 'react-router-dom';
 import { AdminContext } from '../../contexts/AdminContexts';
+import { use } from 'react';
 
 const Dashboard = () => {
 
     const navigate = useNavigate();
-    const { totalUsers, totalProducts, totalOrders, totalRevenue } = useContext(AdminContext);
+    const { fetchuserNumber, fetchProductNumber, fetchOrderNumber, fetchTotalRevenue } = useContext(AdminContext);
+    const [totalUsers, setTotalUsers] = useState(0);
+    const [totalProducts, setTotalProducts] = useState(0);
+    const [totalOrders, setTotalOrders] = useState(0);
+    const [totalRevenue, setTotalRevenue] = useState(0);  
+
+    useEffect(() => {
+        const fetchAllData = async () => {
+            try {
+                const users = await fetchuserNumber();
+                setTotalUsers(users);
+
+                const products = await fetchProductNumber();
+                setTotalProducts(products);
+
+                const orders = await fetchOrderNumber();
+                setTotalOrders(orders);
+
+                const revenue = await fetchTotalRevenue();
+                setTotalRevenue(revenue);
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        fetchAllData();
+    }, []);
 
     return (
         <>
