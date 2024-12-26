@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ORDER_URL = 'http://localhost:5000/orders';
+const ORDER_URL = 'https://e-commerce-smartphones-app-server.onrender.com/orders';
 
 export const fetchOrderById = (id) => {
     return axios.get(`${ORDER_URL}?userId=${id}`);

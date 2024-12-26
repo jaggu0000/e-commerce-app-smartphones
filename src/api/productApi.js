@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const PRODUCT_URL = "http://localhost:5000/products";
+const PRODUCT_URL = "https://e-commerce-smartphones-app-server.onrender.com/products";
 
 export const fetchAllProducts = async () => {
     return axios.get(PRODUCT_URL);
