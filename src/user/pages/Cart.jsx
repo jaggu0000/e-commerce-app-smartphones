@@ -12,7 +12,7 @@ const Cart = () => {
   return (
     <>
       <UserNavbar />
-      <div className="min-h-screen flex flex-col pt-10">
+      <div className="min-h-screen flex flex-col pt-16 md:pt-8">
         <div className="container mx-auto p-6">
           {cartItems.length > 0 &&
             <div className="mt-6">
